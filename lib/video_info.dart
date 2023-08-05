@@ -320,7 +320,7 @@ class _VideoInfoState extends State<VideoInfo> {
       if (_disposed) return;
       setState(() {
         //
-        _progress = position!.inMicroseconds.ceilToDouble() /
+        _progress = position!.inMilliseconds.ceilToDouble() /
             duration.inMilliseconds.ceilToDouble();
       });
     }
@@ -439,7 +439,7 @@ class _VideoInfoState extends State<VideoInfo> {
   }
 
   String convertTwo(int value) {
-    return value < 10 ? "$value" : "$value";
+    return value < 10 ? "0$value" : "$value";
   }
 
   Widget _controlView(BuildContext context) {
@@ -486,7 +486,7 @@ class _VideoInfoState extends State<VideoInfo> {
                 _contoller?.pause();
               },
               onChangeEnd: (value) {
-                final duration = _contoller?.value.duration;
+                final duration = _contoller?.value?.duration;
                 if (duration != null) {
                   var newValue = max(0, min(value, 99)) * 0.01;
                   var millis = (duration.inMilliseconds * newValue).toInt();
